@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Empleados extends Model
 {
     use HasFactory;
-    protected $table = 'zapatos';
+    protected $table = 'empleados';
     public $timestamps = false;
     protected $fillable = [
         'codigo',
@@ -20,4 +20,9 @@ class Empleados extends Model
         'estado',
         'estatus',
     ];
+
+    public static function getEmpleados()
+    {
+        return Empleados::where('estatus',1)->get();
+    }
 }
