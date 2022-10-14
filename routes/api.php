@@ -22,3 +22,5 @@ Route::resource(
     'empleado',
     EmpleadosController::class
 );
+
+Route::get('/cambiarEstado/{id}/{estado}', [EmpleadosController::class, 'cambiarEstado']);

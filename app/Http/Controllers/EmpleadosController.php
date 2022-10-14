@@ -123,6 +123,33 @@ class EmpleadosController extends Controller
                 'mensaje'=>'Message: ' . $e->getMessage()
             ]);
         }
+    }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Empleados $empleado
+     * @return \Illuminate\Http\Response
+     */
+    public function cambiarEstado($id, $estado)
+    {
+        try {
+
+            if($estado == 1) {
+                $nuevoEstado = 0;
+            }else{
+                $nuevoEstado = 1;
+            }
+
+            Empleados::cambiarEstadoEmpleado($id,$nuevoEstado);
+            return response()->json([
+                'mensaje'=>'¡Registro eliminado correctamente!'
+            ]);
+        } catch (Throwable $e) {
+            return response()->json([
+                'mensaje'=>'Message: ' . $e->getMessage()
+            ]);
+        }
     }
 }

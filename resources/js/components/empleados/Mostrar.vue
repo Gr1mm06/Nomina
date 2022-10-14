@@ -44,14 +44,36 @@
                                     <p v-else>Inactivo</p>
                                 </td>
                                 <td>
-                                    <router-link
-                                        :to='{name:"editar", params:{id:empleado.id}}'
-                                        class="btn btn-primary"
+                                    <div v-if="empleado.estado == 1">
+                                        <router-link
+                                            :to='{name:"editar", params:{id:empleado.id}}'
+                                            class="btn btn-primary"
+                                            data-toggle="tooltip"
+                                            data-placement="top"
+                                            title="Editar empleado"
+                                        >
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </router-link>
+                                        <a
+                                            type="button"
+                                            @click="borrarEmpleado(empleado.id)"
+                                            class="btn btn-danger"
+                                            data-toggle="tooltip"
+                                            data-placement="top"
+                                            title="Borrar empleado"
+                                        >
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                    </div>
+                                    <a
+                                        type="button"
+                                        @click="cambiarEstado(empleado.id,empleado.estado)"
+                                        class="btn btn-warning"
+                                        data-toggle="tooltip"
+                                        data-placement="top"
+                                        title="Cambiar de estado"
                                     >
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </router-link>
-                                    <a type="button" @click="borrarEmpleado(empleado.id)" class="btn btn-danger">
-                                        <i class="fa-solid fa-trash"></i>
+                                        <i class="fa-solid fa-shield-halved"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -88,6 +110,17 @@ export default {
         borrarEmpleado(id){
             if (confirm('¿Desea borrar el empleado?')) {
                 this.axios.delete(`/api/empleado/${id}`)
+                    .then( response => {
+                        this.mostrarEmpleados()
+                    })
+                    .catch( error => {
+                        console.log(error)
+                    })
+            }
+        },
+        cambiarEstado(id, estado){
+            if (confirm('¿Desea cambiar el estado del empleado?')) {
+                this.axios.get(`/api/cambiarEstado/${id}/${estado}`)
                     .then( response => {
                         this.mostrarEmpleados()
                     })

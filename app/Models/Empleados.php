@@ -32,4 +32,11 @@ class Empleados extends Model
             'estatus' => 0
         ]);
     }
+
+    public static function cambiarEstadoEmpleado($id, $estado)
+    {
+        Empleados::where('id',$id)->update([
+            'estado' => $estado
+        ]);
+    }
 }
