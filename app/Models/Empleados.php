@@ -25,4 +25,11 @@ class Empleados extends Model
     {
         return Empleados::where('estatus',1)->get();
     }
+
+    public static function eliminarEmpleado($id)
+    {
+        Empleados::where('id',$id)->update([
+            'estatus' => 0
+        ]);
+    }
 }

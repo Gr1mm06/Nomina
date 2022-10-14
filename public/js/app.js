@@ -2157,7 +2157,7 @@ var Crear = function Crear() {
 var routes = [{
   name: 'home',
   path: '/',
-  component: Home
+  component: Mostrar
 }, {
   name: 'mostrar',
   path: '/Empleados',
@@ -19703,29 +19703,6 @@ var render = function () {
                     [
                       _vm._v(
                         "\n                            Inicio\n                        "
-                      ),
-                    ]
-                  ),
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                { staticClass: "nav-item" },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "nav-link",
-                      attrs: {
-                        "exact-active-class": "active",
-                        to: { name: "mostrar" },
-                      },
-                    },
-                    [
-                      _vm._v(
-                        "\n                            Empleados\n                        "
                       ),
                     ]
                   ),

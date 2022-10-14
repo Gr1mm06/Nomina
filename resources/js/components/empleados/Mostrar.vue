@@ -34,7 +34,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="empleado in empleados" :key="empleado.id_empleado">
+                            <tr v-for="empleado in empleados" :key="empleado.id">
                                 <td>{{ empleado.codigo }}</td>
                                 <td>{{ empleado.nombre }} {{ empleado.apellido_paterno }} {{ empleado.apellido_materno }}   </td>
                                 <td>{{ empleado.email }} </td>
@@ -45,12 +45,12 @@
                                 </td>
                                 <td>
                                     <router-link
-                                        :to='{name:"editar", params:{id:empleado.id_empleado}}'
+                                        :to='{name:"editar", params:{id:empleado.id}}'
                                         class="btn btn-primary"
                                     >
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </router-link>
-                                    <a type="button" @click="borrarEmpleado(empleado.id_empleado)" class="btn btn-danger">
+                                    <a type="button" @click="borrarEmpleado(empleado.id)" class="btn btn-danger">
                                         <i class="fa-solid fa-trash"></i>
                                     </a>
                                 </td>
@@ -77,7 +77,7 @@ export default {
     },
     methods : {
         async mostrarEmpleados() {
-           await this.axios.get('/api/empleados')
+           await this.axios.get('/api/empleado')
                .then( response => {
                    this.empleados = response.data
                })
@@ -87,7 +87,7 @@ export default {
         },
         borrarEmpleado(id){
             if (confirm('¿Desea borrar el empleado?')) {
-                this.axios.delete(`/api/empleados/${id}`)
+                this.axios.delete(`/api/empleado/${id}`)
                     .then( response => {
                         this.mostrarEmpleados()
                     })

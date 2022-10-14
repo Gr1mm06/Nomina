@@ -13,11 +13,6 @@
                                 Inicio
                             </router-link>
                         </li>
-                        <li class="nav-item">
-                            <router-link exact-active-class="active" :to="{name:'mostrar'}" class="nav-link">
-                                Empleados
-                            </router-link>
-                        </li>
                     </ul>
                 </div>
             </div>

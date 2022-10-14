@@ -20,7 +20,9 @@ class EmpleadosController extends Controller
 
             return response()->json($empleados);
         } catch (Throwable $e) {
-            echo 'Mensaje ' . $e;
+            return response()->json([
+                'mensaje'=>'Message: ' . $e->getMessage()
+            ]);
         }
     }
 
@@ -47,19 +49,28 @@ class EmpleadosController extends Controller
 
             return response()->json($empleados);
         } catch (Throwable $e) {
-            echo 'Mensaje ' . $e;
+            return response()->json([
+                'mensaje'=>'Message: ' . $e->getMessage()
+            ]);
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Empleados $empleado
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Empleados $empleado)
     {
-        //
+        try {
+            return response()->json($empleado);
+        } catch (Throwable $e) {
+            return response()->json([
+                'mensaje'=>'Message: ' . $e->getMessage()
+            ]);
+        }
+
     }
 
     /**
@@ -70,29 +81,48 @@ class EmpleadosController extends Controller
      */
     public function edit(Empleados $empleados)
     {
-        return response()->json($empleados);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Empleados $empleado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Empleados $empleado)
     {
-        //
+        try {
+            $empleado->fill($request->post())->save();
+            return response()->json([
+                'empleado' => $empleado
+            ]);
+        } catch (Throwable $e) {
+            return response()->json([
+                'mensaje' => 'Message: ' . $e->getMessage()
+            ]);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Empleados $empleado
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Empleados $empleado)
     {
-        //
+        try {
+            Empleados::eliminarEmpleado($empleado['id']);
+            return response()->json([
+                'mensaje'=>'¡Registro eliminado correctamente!'
+            ]);
+        } catch (Throwable $e) {
+            return response()->json([
+                'mensaje'=>'Message: ' . $e->getMessage()
+            ]);
+        }
+
     }
 }

@@ -89,7 +89,7 @@ export default {
     },
     methods:{
         async  crear(){
-            await this.axios.post('/api/empleados', this.empleado)
+            await this.axios.post('/api/empleado', this.empleado)
                 .then(response =>{
                     this.$router.push({name:"mostrar"})
                 })
